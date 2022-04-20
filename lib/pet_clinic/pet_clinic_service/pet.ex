@@ -8,6 +8,8 @@ defmodule PetClinic.PetClinicService.Pet do
     field :sex, :string
     field :type, :string
 
+    belongs_to :owner, PetClinic.PetClinicService.Owner, on_replace: :nilify
+
     timestamps()
   end
 

@@ -8,6 +8,8 @@ defmodule PetClinic.PetClinicService.Owner do
     field :name, :string
     field :phone_num, :string
 
+    has_many :pets, PetClinic.PetClinicService.Pet
+
     timestamps()
   end
 
