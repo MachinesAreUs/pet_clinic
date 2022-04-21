@@ -9,6 +9,7 @@ defmodule PetClinic.PetClinicService.Pet do
     field :type, :string
 
     belongs_to :owner, PetClinic.PetClinicService.Owner, on_replace: :nilify
+    belongs_to :preferred_expert, PetClinic.PetClinicService.HealthExpert, on_replace: :nilify
 
     timestamps()
   end

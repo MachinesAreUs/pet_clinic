@@ -9,6 +9,8 @@ defmodule PetClinic.PetClinicService.HealthExpert do
     field :sex, :string
     field :specialities, :string
 
+    has_many :patients, PetClinic.PetClinicService.Pet, foreign_key: :preferred_expert_id
+
     timestamps()
   end
 
