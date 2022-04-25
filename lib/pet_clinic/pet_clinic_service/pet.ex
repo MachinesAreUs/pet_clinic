@@ -5,8 +5,9 @@ defmodule PetClinic.PetClinicService.Pet do
   schema "pets" do
     field :age, :integer
     field :name, :string
-    field :sex, :string
-    field :type, :string
+    field :sex, Ecto.Enum, values: [:male, :female]
+    #field :type, :string
+    belongs_to :type, PetClinic.PetClinicService.PetType
 
     belongs_to :owner, PetClinic.PetClinicService.Owner, on_replace: :nilify
     belongs_to :preferred_expert, PetClinic.PetClinicService.HealthExpert, on_replace: :nilify
