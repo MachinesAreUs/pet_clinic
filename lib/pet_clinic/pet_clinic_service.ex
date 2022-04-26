@@ -18,7 +18,7 @@ defmodule PetClinic.PetClinicService do
 
   """
   def list_pets do
-    Repo.all(Pet)
+    Repo.all(from p in Pet, preload: [:type])
   end
 
   @doc """
@@ -35,7 +35,9 @@ defmodule PetClinic.PetClinicService do
       ** (Ecto.NoResultsError)
 
   """
-  def get_pet!(id), do: Repo.get!(Pet, id)
+  def get_pet!(id) do
+    Repo.get!(Pet, id) |> Repo.preload(:type)
+  end
 
   @doc """
   Creates a pet.
@@ -68,6 +70,7 @@ defmodule PetClinic.PetClinicService do
 
   """
   def update_pet(%Pet{} = pet, attrs) do
+    IO.inspect(attrs, label: "Update attrs")
     pet
     |> Pet.changeset(attrs)
     |> Repo.update()
@@ -292,5 +295,11 @@ defmodule PetClinic.PetClinicService do
   """
   def change_health_expert(%HealthExpert{} = health_expert, attrs \\ %{}) do
     HealthExpert.changeset(health_expert, attrs)
+  end
+
+  alias PetClinic.PetClinicService.PetType
+
+  def get_pet_types() do
+    Repo.all(PetType)
   end
 end

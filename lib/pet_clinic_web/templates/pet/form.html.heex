@@ -14,11 +14,11 @@
   <%= error_tag f, :age %>
 
   <%= label f, :type %>
-  <%= text_input f, :type %>
+  <%= select f, :type_id, Enum.map(@pet_types, fn pt -> {pt.name, pt.id} end) %>
   <%= error_tag f, :type %>
 
   <%= label f, :sex %>
-  <%= text_input f, :sex %>
+  <%= select f, :sex, ["female": "female", "male": "male"] %>
   <%= error_tag f, :sex %>
 
   <div>
