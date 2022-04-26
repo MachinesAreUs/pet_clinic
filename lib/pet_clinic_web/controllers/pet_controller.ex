@@ -10,8 +10,9 @@ defmodule PetClinicWeb.PetController do
   end
 
   def new(conn, _params) do
+    pet_types = PetClinicService.get_pet_types()
     changeset = PetClinicService.change_pet(%Pet{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", pet_types: pet_types, changeset: changeset)
   end
 
   def create(conn, %{"pet" => pet_params}) do
@@ -33,8 +34,9 @@ defmodule PetClinicWeb.PetController do
 
   def edit(conn, %{"id" => id}) do
     pet = PetClinicService.get_pet!(id)
+    pet_types = PetClinicService.get_pet_types()
     changeset = PetClinicService.change_pet(pet)
-    render(conn, "edit.html", pet: pet, changeset: changeset)
+    render(conn, "edit.html", pet: pet, pet_types: pet_types, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "pet" => pet_params}) do
